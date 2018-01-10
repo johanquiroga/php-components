@@ -5,15 +5,15 @@ namespace Styde;
 class SessionManager
 {
     /**
-     * @var \Styde\SessionFileDriver
+     * @var \Styde\SessionDriverInterface
      */
     protected $driver;
     protected $data = [];
 
     /**
-     * @param \Styde\SessionFileDriver $driver
+     * @param \Styde\SessionDriverInterface $driver
      */
-    public function __construct(SessionFileDriver $driver)
+    public function __construct(SessionDriverInterface $driver)
     {
         $this->driver = $driver;
 
