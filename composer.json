@@ -11,5 +11,8 @@
     "phpunit/phpunit": "^6.5",
     "codedungeon/phpunit-result-printer": "^0.5.1",
     "mockery/mockery": "^1.0"
+  },
+  "require": {
+    "filp/whoops": "^2.1"
   }
 }

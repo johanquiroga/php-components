@@ -1,6 +1,6 @@
 <?php
 
-function view($template, array $vars)
+function view($template, array $vars = [])
 {
     extract($vars);
 
@@ -13,4 +13,11 @@ function view($template, array $vars)
     $templateContent = ob_get_clean();
 
     require ($path . 'layout.php');
+}
+
+function abort404()
+{
+    http_response_code(404);
+    view('page404', compact('access'));
+    exit();
 }

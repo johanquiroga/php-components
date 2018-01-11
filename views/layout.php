@@ -32,12 +32,12 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
-                        <?php // if(Access::check(['student'])): ?>
+                        <?php if($access->check(['student'])): ?>
                             <li><a href="students.php">Students</a></li>
-                        <?php // endif; ?>
-                        <?php // if(Access::check(['teacher'])): ?>
+                        <?php endif; ?>
+                        <?php if($access->check(['teacher'])): ?>
                             <li><a href="teachers.php">Teachers</a></li>
-                        <?php // endif; ?>
+                        <?php endif; ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

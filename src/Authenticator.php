@@ -6,12 +6,16 @@ use Styde\SessionManager as Session;
 
 class Authenticator implements AuthenticatorInterface
 {
-    protected $user;
 
     /**
      * @var \Styde\SessionManager
      */
     protected $session;
+
+    /**
+     * @var \Styde\User
+     */
+    protected $user;
 
     /**
      * @param \Styde\SessionManager $session

@@ -2,4 +2,4 @@
 
 require(__DIR__.'/../bootstrap/start.php');
 
-view('index', []);
+view('index', compact('access'));
