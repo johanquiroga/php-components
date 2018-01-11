@@ -5,12 +5,12 @@ namespace Styde;
 class AccessHandler
 {
     /**
-     * @var \Styde\AuthenticatorInterface
+     * @var \Styde\Authenticator
      */
     protected $auth;
 
     /**
-     * @param \Styde\AuthenticatorInterface $auth
+     * @param \Styde\Authenticator $auth
      */
     public function __construct(Authenticator $auth)
     {
