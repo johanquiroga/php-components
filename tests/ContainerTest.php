@@ -78,6 +78,39 @@ class ContainerTest extends PHPUnit\Framework\TestCase
 
         $container->make('norf');
     }
+
+    public function test_container_make_with_arguments()
+    {
+        $container = new Container();
+
+        $this->assertInstanceOf(
+            MailDummy::class,
+            $container->make('MailDummy', ['url' => 'styde.net', 'key' => 'secret'])
+        );
+    }
+
+    public function test_container_make_with_default_arguments()
+    {
+        $container = new Container();
+
+        $this->assertInstanceOf(
+            MailDummy::class,
+            $container->make('MailDummy', ['url' => 'styde.net'])
+        );
+    }
+}
+
+class MailDummy
+{
+    private $url;
+
+    private $key;
+
+    public function __construct($url, $key = null)
+    {
+        $this->url = $url;
+        $this->key = $key;
+    }
 }
 
 class Foo

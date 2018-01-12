@@ -5,6 +5,7 @@ namespace Styde;
 use Closure;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionException;
 
 class Container
 {
@@ -24,28 +25,32 @@ class Container
         $this->shared[$name] = $object;
     }
 
-    public function make($name)
+    public function make($name, array $arguments = [])
     {
         if (isset($this->shared[$name])) {
             return $this->shared[$name];
         }
 
-        $resolver = $this->bindings[$name]['resolver'];
+        if (isset($this->bindings[$name])) {
+            $resolver = $this->bindings[$name]['resolver'];
+        } else {
+            $resolver = $name;
+        }
 
         if ($resolver instanceof Closure) {
             $object = $resolver($this);
         } else {
-            $object = $this->build($resolver);
+            $object = $this->build($resolver, $arguments);
         }
 
         return $object;
     }
 
-    public function build($name)
+    public function build($name, array $arguments = [])
     {
         try {
             $reflection = new ReflectionClass($name);
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             throw new ContainerException("Unable to build [$name]: " . $e->getMessage(), null, $e);
         }
 
@@ -61,18 +66,34 @@ class Container
 
         $constructorParameters = $constructor->getParameters(); // [ReflectionParameter]
 
-        $arguments = [];
+        $dependencies = [];
 
         foreach ($constructorParameters as $constructorParameter) {
+            $parameterName = $constructorParameter->getName();
+
+            if (isset($arguments[$parameterName])) {
+                $dependencies[] = $arguments[$parameterName];
+                continue;
+            }
+
             try {
-                $parameterClassName = $constructorParameter->getClass()->getName();
-            } catch (\ReflectionException $e) {
+                $parameterClass = $constructorParameter->getClass();
+            } catch (ReflectionException $e) {
                 throw new ContainerException("Unable to build [$name]: " . $e->getMessage(), null, $e);
             }
 
-            $arguments[] = $this->build($parameterClassName);
+            if ($parameterClass != null) {
+                $parameterClassName = $parameterClass->getName();
+                $dependencies[] = $this->build($parameterClassName);
+            } else {
+                if ($constructorParameter->isDefaultValueAvailable()) {
+                    $dependencies[] = $constructorParameter->getDefaultValue();
+                } else {
+                    throw new ContainerException("Please provide the value of the parameter [$parameterName]");
+                }
+            }
         }
 
-        return $reflection->newInstanceArgs($arguments);
+        return $reflection->newInstanceArgs($dependencies);
     }
 }
