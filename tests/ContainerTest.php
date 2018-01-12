@@ -30,20 +30,41 @@ class ContainerTest extends PHPUnit\Framework\TestCase
     {
         $container = new Container();
 
-        $container->bind('key', 'Foo');
+        $container->bind('key', 'StdClass');
 
-        $this->assertInstanceOf('Foo', $container->make('key'));
+        $this->assertInstanceOf('StdClass', $container->make('key'));
+    }
+
+    public function test_bind_with_automatic_resolution()
+    {
+        $container = new Container();
+
+        $container->bind('foo', 'Foo');
+
+        $this->assertInstanceOf('Foo', $container->make('foo'));
     }
 }
 
 class Foo
 {
-    public function __construct(Bar $bar)
+    public function __construct(Bar $bar, Baz $baz)
     {
     }
 }
 
 class Bar
 {
-    
+    public function __construct(FooBar $fooBar)
+    {
+    }
+}
+
+class FooBar
+{
+
+}
+
+class Baz
+{
+
 }

@@ -3,6 +3,8 @@
 namespace Styde;
 
 use Closure;
+use InvalidArgumentException;
+use ReflectionClass;
 
 class Container
 {
@@ -33,9 +35,36 @@ class Container
         if ($resolver instanceof Closure) {
             $object = $resolver($this);
         } else {
-            $object = new $resolver;
+            $object = $this->build($resolver);
         }
 
         return $object;
+    }
+
+    public function build($name)
+    {
+        $reflection = new ReflectionClass($name);
+
+        if (! $reflection->isInstantiable()) {
+            throw new InvalidArgumentException("$name is not instantiable");
+        }
+
+        $constructor = $reflection->getConstructor(); // ReflectionMethod
+
+        if (is_null($constructor)) {
+            return new $name;
+        }
+
+        $constructorParameters = $constructor->getParameters(); // [ReflectionParameter]
+
+        $arguments = [];
+
+        foreach ($constructorParameters as $constructorParameter) {
+            $parameterClassName = $constructorParameter->getClass()->getName();
+
+            $arguments[] = $this->build($parameterClassName);
+        }
+
+        return $reflection->newInstanceArgs($arguments);
     }
 }
