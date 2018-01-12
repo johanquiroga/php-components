@@ -43,7 +43,11 @@ class Container
 
     public function build($name)
     {
-        $reflection = new ReflectionClass($name);
+        try {
+            $reflection = new ReflectionClass($name);
+        } catch (\ReflectionException $e) {
+            throw new ContainerException("Unable to build [$name]: " . $e->getMessage(), null, $e);
+        }
 
         if (! $reflection->isInstantiable()) {
             throw new InvalidArgumentException("$name is not instantiable");
@@ -60,7 +64,11 @@ class Container
         $arguments = [];
 
         foreach ($constructorParameters as $constructorParameter) {
-            $parameterClassName = $constructorParameter->getClass()->getName();
+            try {
+                $parameterClassName = $constructorParameter->getClass()->getName();
+            } catch (\ReflectionException $e) {
+                throw new ContainerException("Unable to build [$name]: " . $e->getMessage(), null, $e);
+            }
 
             $arguments[] = $this->build($parameterClassName);
         }
