@@ -8,13 +8,15 @@ use Styde\SessionManager;
 
 require __DIR__.'/../vendor/autoload.php';
 
-class_alias('Styde\AccessHandler', 'Access');
+class_alias('Styde\Facades\Access', 'Access');
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 $container = Container::getInstance();
+
+Access::setContainer($container);
 
 $container->singleton('session', function () {
     $data = [
