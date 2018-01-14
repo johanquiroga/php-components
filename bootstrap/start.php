@@ -1,10 +1,7 @@
 <?php
 
-use Styde\AccessHandler;
-use Styde\Authenticator;
+use Styde\Application;
 use Styde\Container;
-use Styde\SessionArrayDriver;
-use Styde\SessionManager;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -18,23 +15,12 @@ $container = Container::getInstance();
 
 Access::setContainer($container);
 
-$container->singleton('session', function () {
-    $data = [
-        'user_data' => [
-            'name' => 'Duilio',
-            'role' => 'teacher'
-        ]
-    ];
+$application = new Application($container);
 
-    $driver = new SessionArrayDriver($data);
+//$application->register();
 
-    return new SessionManager($driver);
-});
-
-$container->singleton('auth', function ($container) {
-    return new Authenticator($container->make('session'));
-});
-
-$container->singleton('access', function($container) {
-    return new AccessHandler($container->make('auth'));
-});
+$application->registerProviders([
+    Styde\Providers\SessionProvider::class,
+    Styde\Providers\AuthenticatorProvider::class,
+    Styde\Providers\AuthorizationProvider::class
+]);
