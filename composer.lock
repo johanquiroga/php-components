@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "81b6cd0b6852c758c5458ebd4c6b0819",
+    "content-hash": "d5a02543921e44919933a90fb8eaf82d",
     "packages": [
         {
             "name": "filp/whoops",
@@ -69,12 +69,17 @@
         },
         {
             "name": "johanquiroga/container",
-            "version": "dev-master",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johanquiroga/container.git",
+                "reference": "2f1e9ddc5f5d8437bfdc9792f92ece207041c85b"
+            },
             "dist": {
-                "type": "path",
-                "url": "../container",
+                "type": "zip",
+                "url": "https://api.github.com/repos/johanquiroga/container/zipball/2f1e9ddc5f5d8437bfdc9792f92ece207041c85b",
                 "reference": "2f1e9ddc5f5d8437bfdc9792f92ece207041c85b",
-                "shasum": null
+                "shasum": ""
             },
             "require-dev": {
                 "codedungeon/phpunit-result-printer": "^0.5.1",
@@ -87,6 +92,7 @@
                     "JohanQuiroga\\Container\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -96,7 +102,8 @@
                     "email": "johan.c.quiroga@gmail.com"
                 }
             ],
-            "description": "This is a demo IoC container, please do NOT use it in production"
+            "description": "This is a demo IoC container, please do NOT use it in production",
+            "time": "2018-01-15T14:51:27+00:00"
         },
         {
             "name": "psr/log",
@@ -1883,9 +1890,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "johanquiroga/container": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
