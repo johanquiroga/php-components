@@ -1,7 +1,9 @@
 <?php
 
-use Styde\Application;
-use Styde\Container;
+use JohanQuiroga\Container\Container;
+use JohanQuiroga\Container\Application;
+use JohanQuiroga\Container\Facade;
+use Styde\MyApplication;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -13,11 +15,9 @@ $whoops->register();
 
 $container = Container::getInstance();
 
-Access::setContainer($container);
+Facade::setContainer($container);
 
-$application = new Application($container);
-
-//$application->register();
+$application = new MyApplication($container);
 
 $application->registerProviders([
     Styde\Providers\SessionProvider::class,

@@ -4,6 +4,7 @@ namespace Styde\Providers;
 
 use Styde\SessionArrayDriver;
 use Styde\SessionManager;
+use JohanQuiroga\Container\Provider;
 
 class SessionProvider extends Provider
 {

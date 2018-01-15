@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c050bb50c4a86fb864f8916467290cc",
+    "content-hash": "81b6cd0b6852c758c5458ebd4c6b0819",
     "packages": [
         {
             "name": "filp/whoops",
@@ -68,6 +68,37 @@
             "time": "2017-11-23T18:22:44+00:00"
         },
         {
+            "name": "johanquiroga/container",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../container",
+                "reference": "2f1e9ddc5f5d8437bfdc9792f92ece207041c85b",
+                "shasum": null
+            },
+            "require-dev": {
+                "codedungeon/phpunit-result-printer": "^0.5.1",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JohanQuiroga\\Container\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johan Quiroga",
+                    "email": "johan.c.quiroga@gmail.com"
+                }
+            ],
+            "description": "This is a demo IoC container, please do NOT use it in production"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.2",
             "source": {
@@ -118,16 +149,16 @@
     "packages-dev": [
         {
             "name": "codedungeon/phpunit-result-printer",
-            "version": "0.5.1",
+            "version": "0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikeerickson/phpunit-pretty-result-printer.git",
-                "reference": "2dcf5f220f1019ddb2a85995828f513205416e0d"
+                "reference": "f20153a255dcf444a8abe4ac3051aa35ef865b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mikeerickson/phpunit-pretty-result-printer/zipball/2dcf5f220f1019ddb2a85995828f513205416e0d",
-                "reference": "2dcf5f220f1019ddb2a85995828f513205416e0d",
+                "url": "https://api.github.com/repos/mikeerickson/phpunit-pretty-result-printer/zipball/f20153a255dcf444a8abe4ac3051aa35ef865b90",
+                "reference": "f20153a255dcf444a8abe4ac3051aa35ef865b90",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +193,7 @@
                 "printer",
                 "result-printer"
             ],
-            "time": "2018-01-09T21:42:36+00:00"
+            "time": "2018-01-11T17:18:07+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -1189,16 +1220,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f"
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
-                "reference": "b11c729f95109b56a0fe9650c6a63a0fcd8c439f",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/11c07feade1d65453e06df3b3b90171d6d982087",
+                "reference": "11c07feade1d65453e06df3b3b90171d6d982087",
                 "shasum": ""
             },
             "require": {
@@ -1249,7 +1280,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-12-22T14:50:35+00:00"
+            "time": "2018-01-12T06:34:42+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1852,7 +1883,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "johanquiroga/container": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

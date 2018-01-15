@@ -12,7 +12,14 @@
     "codedungeon/phpunit-result-printer": "^0.5.1",
     "mockery/mockery": "^1.0"
   },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../container"
+    }
+  ],
   "require": {
+    "johanquiroga/container": "dev-master",
     "filp/whoops": "^2.1"
   }
 }

@@ -3,6 +3,7 @@
 namespace Styde\Providers;
 
 use Styde\Authenticator;
+use JohanQuiroga\Container\Provider;
 
 class AuthenticatorProvider extends Provider
 {
